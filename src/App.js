@@ -50,7 +50,7 @@ const styles = {
     position: "absolute",
     background: "linear-gradient(#fbb69d 0%, #f4d4bd 100%)",
     transform: "rotate(-90deg)",
-    marginLeft: "90%",
+    marginLeft: "100%",
     transition: "margin-left 1s ease-in-out",
     zIndex: "-1"
   }

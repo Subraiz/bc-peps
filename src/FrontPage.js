@@ -6,8 +6,8 @@ const items = [
   { id: "apple", label: "apple" },
   { id: "bannana", label: "banana" },
   { id: "pear", label: "pear" },
-  { id: "apple", label: "apple pie" },
-  { id: "apple", label: "apple slices" },
+  { id: "apple1", label: "apple pie" },
+  { id: "apple2", label: "apple slices" },
   { id: "pear", label: "pear" }
 ];
 
@@ -76,7 +76,7 @@ class FrontPage extends Component {
         </a>
       );
     } else {
-      return <p className="titleSmall">BC PEPs</p>;
+      return <p className="titleSmall">BC PEPs </p>;
     }
   }
 
@@ -230,7 +230,7 @@ const styles = {
     fontSize: 16
   },
   headerContainer: {
-    marginTop: "60px",
+    marginTop: "30px",
     width: "100%",
     display: "flex",
     justifyContent: "center"
@@ -281,7 +281,7 @@ const styles = {
   searchBarContainerStyle: {
     display: "flex",
     flexDirection: "row",
-    marginTop: 0,
+    marginTop: -100,
     transition: "margin-top .5s ease-in-out"
   },
   searchBarContainerStyleExpanded: {
