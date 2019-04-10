@@ -1,49 +1,4 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 100%;
-  pointer-events: none;
-  position: fixed;
-}
-
-.sidebarContainer {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.sidebar {
-  position: fixed;
-  right: -5%;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-// best seen at 1500px or less
+@import url("https://fonts.googleapis.com/css?family=Playfair+Display");
 
 html,
 body {
@@ -57,11 +12,11 @@ body {
   float: right;
   height: 100%;
   width: 100vh;
-  position: fixed;
-
+  position: absolute;
   background: linear-gradient(#fbb69d 0%, #f4d4bd 100%);
   transform: rotate(-90deg);
   margin-left: 60%;
+  z-index: -1;
 }
 
 .wave {
@@ -70,15 +25,15 @@ body {
   top: -198px;
   width: 3400px;
   height: 2000px;
-  animation: wave 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite;
+  animation: wave 24s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite;
   transform: translate3d(0, 0, 0);
 }
 
 .wave:nth-of-type(2) {
-  top: -150px;
-  animation: wave 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) -0.125s infinite,
-    swell 7s ease -1.25s infinite;
-  opacity: 0.6;
+  top: -140px;
+  animation: wave 24s cubic-bezier(0.36, 0.45, 0.63, 0.53) -0.125s infinite,
+    swell 24s ease -1.25s infinite;
+  opacity: 1;
 }
 
 @keyframes wave {
@@ -98,4 +53,35 @@ body {
   50% {
     transform: translate3d(0, 5px, 0);
   }
+}
+
+@keyframes expand {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+menu {
+  position: absolute;
+  box-sizing: border-box;
+  width: 100%;
+  border: 1px solid #cccccc;
+}
+
+.item {
+  padding: 2px 6px;
+  cursor: default;
+}
+
+.titleSmall {
+  font-family: "Playfair Display";
+  color: black;
+  text-decoration: none;
+  font-size: 16;
+  font-weight: 600;
+  animation-name: expand;
+  animation-duration: 1s;
 }
