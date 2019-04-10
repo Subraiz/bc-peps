@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1600px" height="1108px" viewBox="0 0 1600 1108" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 53.2 (72643) - https://sketchapp.com -->
+    <title>wave</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="50%" y1="24.3368025%" x2="50%" y2="137.194535%" id="linearGradient-1">
+            <stop stop-color="#F4D4BD" offset="0%"></stop>
+            <stop stop-color="#FBB69D" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-2">
+            <stop stop-color="#F7C5AD" offset="0%"></stop>
+            <stop stop-color="#F4D4BD" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Desktop-HD">
+            <g id="wave">
+                <path d="M0.005,169.277602 C311,169.277602 409.898,-0.349592757 811,0.000154035866 C1211,0.000154035866 1311,169.277602 1600,169.277602 L1600,276.999614 L0,276.999614 C0,276.999614 0.005,209.84823 0.005,169.277602 Z" id="Path" fill="url(#linearGradient-1)" transform="translate(800.000000, 138.499614) scale(-1, 1) translate(-800.000000, -138.499614) "></path>
+                <rect id="Rectangle" fill="url(#linearGradient-2)" x="0" y="238" width="1600" height="870"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

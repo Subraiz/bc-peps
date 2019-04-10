@@ -4,8 +4,19 @@
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
+  height: 100%;
   pointer-events: none;
+  position: fixed;
+}
+
+.sidebarContainer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.sidebar {
+  position: fixed;
+  right: -5%;
 }
 
 .App-header {
@@ -29,5 +40,62 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+// best seen at 1500px or less
+
+html,
+body {
+  height: 100%;
+}
+body {
+  overflow: hidden;
+}
+
+.ocean {
+  float: right;
+  height: 100%;
+  width: 100vh;
+  position: fixed;
+
+  background: linear-gradient(#fbb69d 0%, #f4d4bd 100%);
+  transform: rotate(-90deg);
+  margin-left: 60%;
+}
+
+.wave {
+  background: url(./assets/Sidebar.svg) repeat-x;
+  position: absolute;
+  top: -198px;
+  width: 3400px;
+  height: 2000px;
+  animation: wave 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite;
+  transform: translate3d(0, 0, 0);
+}
+
+.wave:nth-of-type(2) {
+  top: -150px;
+  animation: wave 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) -0.125s infinite,
+    swell 7s ease -1.25s infinite;
+  opacity: 0.6;
+}
+
+@keyframes wave {
+  0% {
+    margin-left: 0;
+  }
+  100% {
+    margin-left: -1600px;
+  }
+}
+
+@keyframes swell {
+  0%,
+  100% {
+    transform: translate3d(0, -25px, 0);
+  }
+  50% {
+    transform: translate3d(0, 5px, 0);
   }
 }
