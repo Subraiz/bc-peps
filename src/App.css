@@ -2,7 +2,7 @@
 
 /* Debugging styles */
 
-div {
+/* div {
   outline: 1px dotted red;
 }
 p {
@@ -16,13 +16,9 @@ li {
 }
 img {
   outline: 1px solid purple;
-}
+} */
 
-html,
-body {
-  height: 100%;
-}
-body {
+html {
   overflow: hidden;
 }
 

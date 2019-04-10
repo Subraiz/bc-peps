@@ -1,17 +1,85 @@
 import React, { Component } from "react";
-import Card from "./Card";
+import Card from "../components/Card";
+import posed, { PoseGroup } from "react-pose";
 
 import Fab from "@material-ui/core/Fab";
 import Autocomplete from "react-autocomplete";
 
 const items = [
-  { id: "apple", label: "apple" },
-  { id: "bannana", label: "banana" },
-  { id: "pear", label: "pear" },
-  { id: "apple1", label: "apple pie" },
-  { id: "apple2", label: "apple slices" },
-  { id: "pear", label: "pear" }
+  {
+    id: "muller",
+    type: "prof",
+    name: "Robert Muller",
+    firstName: "Robert",
+    lastName: "Muller",
+    department: "Computer Science",
+    rating: 3.8,
+    courses: [
+      "Computer Science I",
+      "Computer Science II",
+      "Algorithms",
+      "Programming Languages"
+    ],
+    comments: [
+      `He is a great person to have teach your class, I honeslty fell in
+    love with Computer Science the second day I had him! Cannot
+    reccomend him enough!`,
+      `I have had way better Professors! DO NOT RECCOMEND!! His problem sets are ridiculously hard for no apparent reason. He needs to ease up!`,
+      `Kind of a know it all. Would be a lot better of a class if he actually took a second to explain what he was saying instaed of just rambling on!`
+    ]
+  },
+  {
+    id: "ali",
+    type: "prof",
+    name: "Ratib Ali",
+    firstName: "Ratib",
+    lastName: "Ali",
+    department: "Economics",
+    rating: 4.2,
+    courses: ["Microecnomic Theory", "Macroecnomic Theory", "Statistics"],
+    comments: [
+      `He is a great person to have teach your class, I honeslty fell in
+    love with Computer Science the second day I had him! Cannot
+    reccomend him enough!`,
+      `I have had way better Professors! DO NOT RECCOMEND!! His problem sets are ridiculously hard for no apparent reason. He needs to ease up!`,
+      `Kind of a know it all. Would be a lot better of a class if he actually took a second to explain what he was saying instaed of just rambling on!`
+    ]
+  },
+  {
+    id: "ahmed",
+    type: "prof",
+    name: "Subraiz Ahmed",
+    firstName: "Subraiz",
+    lastName: "Ahmed",
+    department: "Economics",
+    rating: 4.2,
+    courses: ["Microecnomic Theory", "Macroecnomic Theory", "Statistics"],
+    comments: [
+      `He is a great person to have teach your class, I honeslty fell in
+    love with Computer Science the second day I had him! Cannot
+    reccomend him enough!`,
+      `I have had way better Professors! DO NOT RECCOMEND!! His problem sets are ridiculously hard for no apparent reason. He needs to ease up!`,
+      `Kind of a know it all. Would be a lot better of a class if he actually took a second to explain what he was saying instaed of just rambling on!`
+    ]
+  }
 ];
+
+const Modal = posed.div({
+  enter: {
+    y: 0,
+    opacity: 1,
+    delay: 100,
+    transition: {
+      y: { type: "spring", stiffness: 1000, damping: 15 },
+      default: { duration: 400 }
+    }
+  },
+  exit: {
+    y: 50,
+    opacity: 0,
+    transition: { duration: 150 }
+  }
+});
 
 class FrontPage extends Component {
   constructor(props) {
@@ -21,7 +89,8 @@ class FrontPage extends Component {
       value: "",
       searchTerms: [],
       titleStyle: styles.titleStyle,
-      searchBarContainerStyle: styles.searchBarContainerStyle
+      searchBarContainerStyle: styles.searchBarContainerStyle,
+      professors: []
     };
   }
 
@@ -40,6 +109,7 @@ class FrontPage extends Component {
     e.preventDefault();
     this.setState({ value: e.target.value });
     let searchTerms = [];
+    let professors = [];
     if (e.target.value !== "") {
       this.props.collapseWaves();
       this.setState({
@@ -49,32 +119,37 @@ class FrontPage extends Component {
       });
       let itemCount = 0;
       items.some(item => {
-        if (itemCount == 4) {
+        if (itemCount === 4) {
           return true;
         }
-        if (item.label.toLowerCase().includes(e.target.value.toLowerCase())) {
+        if (item.name.toLowerCase().includes(e.target.value.toLowerCase())) {
+          if (item.type === "prof") {
+            professors.push(item);
+          }
           searchTerms.push(item);
           itemCount++;
         }
+        return false;
       });
-      let lastItem = { id: "search-term", label: `Search "${e.target.value}"` };
+      let lastItem = { id: "search-term", name: `Search "${e.target.value}"` };
       searchTerms.push(lastItem);
     } else {
       this.props.expandWaves();
       this.setState({
         titleStyle: styles.titleStyle,
+        searchTerms: searchTerms,
         cornerTitle: true,
         searchBarContainerStyle: styles.searchBarContainerStyle
       });
     }
 
-    this.setState({ searchTerms });
+    this.setState({ searchTerms, professors });
   };
 
   renderCornerTitle = () => {
     if (this.state.cornerTitle) {
       return (
-        <a style={styles.infoStyle} href="">
+        <a style={styles.infoStyle} href="disabled">
           <p>What is PEPs?</p>
         </a>
       );
@@ -82,6 +157,16 @@ class FrontPage extends Component {
       return <p className="titleSmall">BC PEPs </p>;
     }
   };
+
+  renderProfessors() {
+    return this.state.professors.map(professor => {
+      return (
+        <Modal key={professor.id}>
+          <Card professor={professor} />
+        </Modal>
+      );
+    });
+  }
 
   render() {
     return (
@@ -142,11 +227,11 @@ class FrontPage extends Component {
               }}
               menuStyle={styles.menuStyle}
               items={this.state.searchTerms}
-              getItemValue={item => item.label}
+              getItemValue={item => item.name}
               renderItem={(item, highlighted) => {
-                item.label =
-                  item.label.charAt(0).toUpperCase() + item.label.slice(1);
-                if (item.id == "search-term") {
+                item.name =
+                  item.name.charAt(0).toUpperCase() + item.name.slice(1);
+                if (item.id === "search-term") {
                   return (
                     <div style={{ paddingLeft: "20px" }} key={item.id}>
                       <div
@@ -164,11 +249,17 @@ class FrontPage extends Component {
                           color: "grey"
                         }}
                       >
-                        {item.label}
+                        {item.name}
                       </p>
                     </div>
                   );
                 } else {
+                  let prefix = "";
+                  if (item.type === "prof") {
+                    prefix = "Prof.";
+                  } else if (item.type === "course") {
+                    prefix = "Course:";
+                  }
                   return (
                     <div
                       key={item.id}
@@ -178,7 +269,7 @@ class FrontPage extends Component {
                       }}
                     >
                       <p style={{ fontSize: 18, fontFamily: "Avenir" }}>
-                        {item.label}
+                        {`${prefix} ${item.name}`}
                       </p>
                     </div>
                   );
@@ -210,6 +301,9 @@ class FrontPage extends Component {
             </Fab>
           </div>
         </div>
+        <div style={styles.professorContainer}>
+          <PoseGroup>{this.renderProfessors()}</PoseGroup>
+        </div>
       </div>
     );
   }
@@ -217,9 +311,15 @@ class FrontPage extends Component {
 
 const styles = {
   body: {
-    height: "100vh",
+    position: "absolute",
+    display: "flex",
+    flexDirection: "column",
+    zIndex: 3,
+    top: 0,
+    bottom: 0,
+    left: 0,
     width: "100vw",
-    zIndex: 3
+    flexGrow: 1
   },
   header: {
     width: "95%",
@@ -239,7 +339,9 @@ const styles = {
     justifyContent: "center"
   },
   mainContainer: {
-    marginLeft: "3%"
+    marginLeft: "3%",
+
+    width: "100vw"
   },
   menuStyle: {
     borderBottomRightRadius: "20px",
@@ -292,6 +394,15 @@ const styles = {
     flexDirection: "row",
     marginTop: -400,
     transition: "margin-top .5s ease-in-out .25s"
+  },
+  professorContainer: {
+    marginTop: 20,
+    flexGrow: 1,
+    overflowY: "scroll",
+    paddingBottom: 20,
+    paddingLeft: 5,
+    overflow: "auto",
+    marginLeft: "3%"
   }
 };
 
