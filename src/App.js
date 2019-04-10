@@ -1,59 +1,53 @@
 import React, { Component } from "react";
-import FrontPage from "./FrontPage";
+import styled from 'styled-components';
+
+import FrontPage from "./containers/FrontPage";
+import theme from "./constants/themeVariables";
 import "./App.css";
 
-class App extends Component {
-  state = {
-    oceanStyle: styles.oceanStyle
-  };
+const Ocean = styled.div `
+    z-index: -1;
+    position: absolute;
+    float: right;
+    height: 100%;
+    width: 100vh;
+    margin-left: ${props => props.open ? '60%' : '85%'};
 
-  collapseWaves() {
-    this.setState({ oceanStyle: styles.collapsedOceanStyle });
+    background: linear-gradient(${theme.colors.pink1} 0 ${theme.colors.pink2} 100%);
+    transform: rotate(-90deg);
+    transition: margin-left 1s cubic-bezier(0.755, 0.005, 0.490, 1.000);
+`;
+
+class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      oceanOpen: true
+    };
   }
 
-  expandWaves() {
-    this.setState({ oceanStyle: styles.oceanStyle });
+  collapseWaves = () => {
+    this.setState({ oceanOpen: false });
+  }
+
+  expandWaves = () => {
+    this.setState({ oceanOpen: true });
   }
 
   render() {
     return (
       <div className="App">
-        <div style={this.state.oceanStyle}>
+        <Ocean open={this.state.oceanOpen}>
           <div className="wave" />
           <div className="wave" />
-        </div>
+        </Ocean>
         <FrontPage
-          collapseWaves={this.collapseWaves.bind(this)}
-          expandWaves={this.expandWaves.bind(this)}
+          collapseWaves={this.collapseWaves}
+          expandWaves={this.expandWaves}
         />
       </div>
     );
   }
 }
-
-const styles = {
-  oceanStyle: {
-    float: "right",
-    height: "100%",
-    width: "100vh",
-    position: "absolute",
-    background: "linear-gradient(#fbb69d 0%, #f4d4bd 100%)",
-    transform: "rotate(-90deg)",
-    marginLeft: "60%",
-    transition: "margin-left 1s ease-in-out",
-    zIndex: "-1"
-  },
-  collapsedOceanStyle: {
-    float: "right",
-    height: "100%",
-    width: "100vh",
-    position: "absolute",
-    background: "linear-gradient(#fbb69d 0%, #f4d4bd 100%)",
-    transform: "rotate(-90deg)",
-    marginLeft: "100%",
-    transition: "margin-left 1s ease-in-out",
-    zIndex: "-1"
-  }
-};
 
 export default App;

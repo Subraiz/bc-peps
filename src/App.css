@@ -1,5 +1,14 @@
 @import url("https://fonts.googleapis.com/css?family=Playfair+Display");
 
+/* Debugging styles */
+
+div { outline: 1px dotted red }
+p   { outline: 1px solid green }
+a   { outline: 2px solid yellow }
+li  { outline: 1px dashed cyan }
+img { outline: 1px solid purple}
+
+
 html,
 body {
   height: 100%;
@@ -25,14 +34,14 @@ body {
   top: -198px;
   width: 3400px;
   height: 2000px;
-  animation: wave 24s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite;
+  animation: wave 30s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite;
   transform: translate3d(0, 0, 0);
 }
 
 .wave:nth-of-type(2) {
   top: -140px;
-  animation: wave 24s cubic-bezier(0.36, 0.45, 0.63, 0.53) -0.125s infinite,
-    swell 24s ease -1.25s infinite;
+  animation: wave 30s cubic-bezier(0.36, 0.45, 0.63, 0.53) -0.125s infinite,
+    swell 30s ease -1.25s infinite;
   opacity: 1;
 }
 

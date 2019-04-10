@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+
 import Fab from "@material-ui/core/Fab";
 import Autocomplete from "react-autocomplete";
 
@@ -23,21 +24,22 @@ class FrontPage extends Component {
     };
   }
 
-  componentDidMount() {}
+  componentDidMount = () => {}
 
-  onSearchButtonPress() {
+  onSearchButtonPress = () => {
     console.log(this.state.value);
   }
 
-  onSearchResultSelect(value) {
+  onSearchResultSelect = (value) => {
     this.setState({ value });
     console.log(value);
   }
 
-  reloadData(e) {
+  reloadData = (e) => {
+    e.preventDefault();
     this.setState({ value: e.target.value });
     let searchTerms = [];
-    if (e.target.value != "") {
+    if (e.target.value !== "") {
       this.props.collapseWaves();
       this.setState({
         titleStyle: styles.hiddenTitleStyle,
@@ -68,7 +70,7 @@ class FrontPage extends Component {
     this.setState({ searchTerms });
   }
 
-  renderCornerTitle() {
+  renderCornerTitle = () => {
     if (this.state.cornerTitle) {
       return (
         <a style={styles.infoStyle} href="">
@@ -182,11 +184,11 @@ class FrontPage extends Component {
                 }
               }}
               value={this.state.value}
-              onChange={this.reloadData.bind(this)}
-              onSelect={this.onSearchResultSelect.bind(this)}
+              onChange={this.reloadData}
+              onSelect={this.onSearchResultSelect}
             />
             <Fab
-              onClick={this.onSearchButtonPress.bind(this)}
+              onClick={this.onSearchButtonPress}
               variant="extended"
               aria-label="Delete"
               style={{
