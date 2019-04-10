@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Fab from "@material-ui/core/Fab";
 import Autocomplete from "react-autocomplete";
+import Card from "./Card";
 
 const items = [
   { id: "apple", label: "apple" },
@@ -47,13 +48,14 @@ class FrontPage extends Component {
       let itemCount = 0;
       items.some(item => {
         // Max of 4 items to be displayed
-        if (itemCount == 4) {
+        if (itemCount === 4) {
           return true;
         }
         if (item.label.toLowerCase().includes(e.target.value.toLowerCase())) {
           searchTerms.push(item);
           itemCount++;
         }
+        return false;
       });
       searchTerms.push({
         id: "search-term",
@@ -74,7 +76,7 @@ class FrontPage extends Component {
   renderCornerTitle() {
     if (this.state.cornerTitle) {
       return (
-        <a style={styles.infoStyle} href="">
+        <a style={styles.infoStyle} href="disabled">
           <p>What is PEPs?</p>
         </a>
       );
@@ -146,7 +148,7 @@ class FrontPage extends Component {
               renderItem={(item, highlighted) => {
                 item.label =
                   item.label.charAt(0).toUpperCase() + item.label.slice(1);
-                if (item.id == "search-term") {
+                if (item.id === "search-term") {
                   return (
                     <div style={{ paddingLeft: "20px" }} key={item.id}>
                       <div
@@ -210,6 +212,7 @@ class FrontPage extends Component {
             </Fab>
           </div>
         </div>
+        <Card />
       </div>
     );
   }
