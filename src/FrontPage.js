@@ -35,6 +35,7 @@ class FrontPage extends Component {
     this.setState({ value: e.target.value });
     let searchTerms = [];
     if (e.target.value != "") {
+      this.props.collapseWaves();
       this.setState({
         titleStyle: styles.hiddenTitleStyle,
         cornerTitle: false,
@@ -48,6 +49,7 @@ class FrontPage extends Component {
       let lastItem = { id: "search-term", label: `Search "${e.target.value}"` };
       searchTerms.push(lastItem);
     } else {
+      this.props.expandWaves();
       this.setState({
         titleStyle: styles.titleStyle,
         cornerTitle: true,
@@ -181,15 +183,16 @@ class FrontPage extends Component {
               aria-label="Delete"
               style={{
                 color: "white",
-                backgroundColor: "black",
+                backgroundColor: "#1e1e1e",
                 boxShadow: "1px 2px 3px rgba(0,0,0,.3)",
                 fontFamily: "Avenir",
                 fontSize: 18,
                 textTransform: "none",
                 marginLeft: "15px",
-                paddingLeft: "20px",
-                paddingRight: "20px",
-                marginTop: 10
+                paddingLeft: "30px",
+                paddingRight: "30px",
+                borderRadius: 100,
+                height: 64
               }}
             >
               Search
@@ -219,7 +222,7 @@ const styles = {
     fontSize: 16
   },
   headerContainer: {
-    marginTop: 30,
+    marginTop: "60px",
     width: "100%",
     display: "flex",
     justifyContent: "center"
@@ -277,7 +280,7 @@ const styles = {
   searchBarContainerStyleExpanded: {
     display: "flex",
     flexDirection: "row",
-    marginTop: -300,
+    marginTop: -400,
     transition: "margin-top .5s ease-in-out .25s"
   }
 };
