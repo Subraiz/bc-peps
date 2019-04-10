@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Card from "./Card";
 
 import Fab from "@material-ui/core/Fab";
 import Autocomplete from "react-autocomplete";
@@ -24,18 +25,18 @@ class FrontPage extends Component {
     };
   }
 
-  componentDidMount = () => {}
+  componentDidMount = () => {};
 
   onSearchButtonPress = () => {
     console.log(this.state.value);
-  }
+  };
 
-  onSearchResultSelect = (value) => {
+  onSearchResultSelect = value => {
     this.setState({ value });
     console.log(value);
-  }
+  };
 
-  reloadData = (e) => {
+  reloadData = e => {
     e.preventDefault();
     this.setState({ value: e.target.value });
     let searchTerms = [];
@@ -68,7 +69,7 @@ class FrontPage extends Component {
     }
 
     this.setState({ searchTerms });
-  }
+  };
 
   renderCornerTitle = () => {
     if (this.state.cornerTitle) {
@@ -80,7 +81,7 @@ class FrontPage extends Component {
     } else {
       return <p className="titleSmall">BC PEPs </p>;
     }
-  }
+  };
 
   render() {
     return (
