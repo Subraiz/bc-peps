@@ -5,6 +5,9 @@ import Autocomplete from "react-autocomplete";
 const items = [
   { id: "apple", label: "apple" },
   { id: "bannana", label: "banana" },
+  { id: "pear", label: "pear" },
+  { id: "apple", label: "apple pie" },
+  { id: "apple", label: "apple slices" },
   { id: "pear", label: "pear" }
 ];
 
@@ -41,9 +44,14 @@ class FrontPage extends Component {
         cornerTitle: false,
         searchBarContainerStyle: styles.searchBarContainerStyleExpanded
       });
-      items.forEach(item => {
+      let itemCount = 0;
+      items.some(item => {
+        if (itemCount == 4) {
+          return true;
+        }
         if (item.label.toLowerCase().includes(e.target.value.toLowerCase())) {
           searchTerms.push(item);
+          itemCount++;
         }
       });
       let lastItem = { id: "search-term", label: `Search "${e.target.value}"` };
@@ -241,8 +249,7 @@ const styles = {
     zIndex: -2,
     fontSize: "90%",
     width: "60vw",
-    overflow: "auto",
-    maxHeight: "20%" // TODO: don't cheat, let it flow to the bottom
+    overflow: "auto"
   },
   searchBarStyle: {
     width: "60vw",
