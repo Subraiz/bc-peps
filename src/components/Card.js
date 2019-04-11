@@ -122,9 +122,9 @@ const Card = props => {
           index === props.professor.courses.length - 1 ||
           index === previewCourses.length - 1
         ) {
-          course += `${item}`;
+          course += `${item.name}`;
         } else {
-          course += `${item}, `;
+          course += `${item.name}, `;
         }
       });
     }

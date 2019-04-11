@@ -15,10 +15,10 @@ const items = [
     department: "Computer Science",
     rating: 3.8,
     courses: [
-      "Computer Science I",
-      "Computer Science II",
-      "Algorithms",
-      "Programming Languages"
+      { name: "Computer Science I", id: "CSCI1101" },
+      { name: "Computer Science II", id: "CSCI2201" },
+      { name: "Algorithms", id: "CSCI3378" },
+      { name: "Programming Languages", id: "CSCI3376" }
     ],
     comments: [
       `He is a great person to have teach your class, I honeslty fell in
@@ -36,7 +36,12 @@ const items = [
     lastName: "Ali",
     department: "Economics",
     rating: 4.2,
-    courses: ["Microecnomic Theory", "Macroecnomic Theory", "Statistics"],
+    courses: [
+      { name: "Microeconomic Principals", id: "ECON1101" },
+      { name: "Macroeconomic Principals", id: "ECON1102" },
+      { name: "Microeconomic Theory", id: "ECON2201" },
+      { name: "Macroeconomic Theory", id: "ECON2202" }
+    ],
     comments: [
       `He is a great person to have teach your class, I honeslty fell in
     love with Computer Science the second day I had him! Cannot
@@ -106,6 +111,8 @@ class FrontPage extends Component {
 
   reloadData = e => {
     e.preventDefault();
+    e.target.value =
+      e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1);
     this.setState({ value: e.target.value });
     let searchTerms = [];
     let professors = [];
@@ -118,7 +125,7 @@ class FrontPage extends Component {
       });
       let itemCount = 0;
       items.some(item => {
-        if (itemCount === 4) {
+        if (itemCount === 5) {
           return true;
         }
         if (item.name.toLowerCase().includes(e.target.value.toLowerCase())) {
@@ -127,7 +134,24 @@ class FrontPage extends Component {
           }
           searchTerms.push(item);
           itemCount++;
+        } else {
+          item.courses.some(course => {
+            if (
+              course.name
+                .toLowerCase()
+                .includes(e.target.value.toLowerCase()) ||
+              course.id.toLowerCase().includes(e.target.value.toLowerCase())
+            ) {
+              if (item.type === "prof") {
+                professors.push(item);
+              }
+              searchTerms.push(item);
+              return true;
+            }
+            return false;
+          });
         }
+
         return false;
       });
       let lastItem = { id: "search-term", name: `Search "${e.target.value}"` };
@@ -351,8 +375,7 @@ const styles = {
     boxShadow: "0 2px 12px rgba(0, 0, 0, 0.1)",
     background: "rgba(255, 255, 255, 0.9)",
     marginTop: -25,
-    paddingTop: "40px",
-    paddingBottom: "30px",
+    paddingTop: "20px",
     zIndex: -2,
     fontSize: "90%",
     width: "60vw",
