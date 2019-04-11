@@ -100,8 +100,8 @@ class FrontPage extends Component {
   };
 
   onCardClick(item) {
-    this.setState({ value: item.name });
     this.props.transitionWaves();
+    this.setState({ value: item.name });
   }
 
   reloadData = e => {
