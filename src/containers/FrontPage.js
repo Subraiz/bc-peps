@@ -51,16 +51,10 @@ const items = [
     name: "Subraiz Ahmed",
     firstName: "Subraiz",
     lastName: "Ahmed",
-    department: "Economics",
-    rating: 4.2,
-    courses: ["Microecnomic Theory", "Macroecnomic Theory", "Statistics"],
-    comments: [
-      `He is a great person to have teach your class, I honeslty fell in
-    love with Computer Science the second day I had him! Cannot
-    reccomend him enough!`,
-      `I have had way better Professors! DO NOT RECCOMEND!! His problem sets are ridiculously hard for no apparent reason. He needs to ease up!`,
-      `Kind of a know it all. Would be a lot better of a class if he actually took a second to explain what he was saying instaed of just rambling on!`
-    ]
+    department: "Computer Science",
+    rating: 5.0,
+    courses: [],
+    comments: []
   }
 ];
 
@@ -70,7 +64,7 @@ const Modal = posed.div({
     opacity: 1,
     delay: 100,
     transition: {
-      y: { type: "spring", stiffness: 1000, damping: 15 },
+      y: { type: "tween", stiffness: 1000, damping: 15 },
       default: { duration: 400 }
     }
   },
@@ -104,6 +98,11 @@ class FrontPage extends Component {
     this.setState({ value });
     console.log(value);
   };
+
+  onCardClick(item) {
+    this.setState({ value: item.name });
+    console.log(item.name);
+  }
 
   reloadData = e => {
     e.preventDefault();
@@ -162,7 +161,10 @@ class FrontPage extends Component {
     return this.state.professors.map(professor => {
       return (
         <Modal key={professor.id}>
-          <Card professor={professor} />
+          <Card
+            professor={professor}
+            onClick={this.onCardClick.bind(this, professor)}
+          />
         </Modal>
       );
     });

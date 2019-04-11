@@ -10,6 +10,16 @@ const CardContainer = styled.div`
   border-radius: 50px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
   margin-top: 15px;
+  cursor: pointer;
+
+  .unselectable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
 
   .rating {
     font-size: 42px;
@@ -42,6 +52,17 @@ const CardContainer = styled.div`
     align-items: center;
   }
 
+  .noComment {
+    text-overflow: ellipsis
+    font-family: "Avenir";
+    color: #1e1e1e;
+    font-size: 15px;
+    display: -webkit-box;
+    overflow: hidden;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  }
+
   .commentText {
     margin-left: 10px;
     width: 15vw;
@@ -71,43 +92,57 @@ const ProfessorInformationContainer = styled.div`
 const Card = props => {
   function renderComments() {
     let previewComments = props.professor.comments.slice(0, 3);
-    return previewComments.map((comment, index) => {
+    if (previewComments.length === 0) {
       return (
-        <div className="comment" key={`comment + ${index}`}>
-          <FaQuoteLeft color="#1e1e1e" />
-          <p className="commentText">{comment}</p>
-        </div>
+        <p className="noComment">
+          This professor does not have any evaluations yet. Leave a review if
+          you have had them.
+        </p>
       );
-    });
+    } else {
+      return previewComments.map((comment, index) => {
+        return (
+          <div className="comment" key={`comment + ${index}`}>
+            <FaQuoteLeft color="#1e1e1e" />
+            <p className="commentText">{comment}</p>
+          </div>
+        );
+      });
+    }
   }
 
   function renderCourses() {
     let previewCourses = props.professor.courses.slice(0, 4);
     let course = "Courses: ";
-    previewCourses.forEach((item, index) => {
-      console.log(course);
-      if (
-        index === props.professor.courses.length - 1 ||
-        index === previewCourses.length - 1
-      ) {
-        course += `${item}`;
-      } else {
-        course += `${item}, `;
-      }
-    });
+    if (previewCourses.length === 0) {
+      course += "N/A";
+    } else {
+      previewCourses.forEach((item, index) => {
+        if (
+          index === props.professor.courses.length - 1 ||
+          index === previewCourses.length - 1
+        ) {
+          course += `${item}`;
+        } else {
+          course += `${item}, `;
+        }
+      });
+    }
+
     return course;
   }
 
   return (
-    <CardContainer>
+    <CardContainer onClick={props.onClick} className="card">
       <HeaderContainer>
-        <ProfessorInformationContainer>
+        <ProfessorInformationContainer className="unselectable">
           <p
             style={{
               marginTop: 0,
               fontFamily: "Playfair Display",
               fontSize: 48
             }}
+            className="unselectable"
           >
             Prof. {props.professor.name}
             <span
@@ -118,6 +153,7 @@ const Card = props => {
                 marginTop: "9%",
                 fontSize: 16
               }}
+              className="unselectable"
             >
               {props.professor.department}
             </span>
@@ -129,6 +165,7 @@ const Card = props => {
               color: "#1e1e1e",
               fontSize: 16
             }}
+            className="unselectable"
           >
             {renderCourses()}
           </p>
@@ -141,13 +178,15 @@ const Card = props => {
           }}
         >
           <FaStar size={42} color="maroon" />
-          <p className="rating">{props.professor.rating}</p>
+          <p className="rating unselectable">
+            {props.professor.rating.toFixed(2)}
+          </p>
         </div>
       </HeaderContainer>
       <div className="lineContainer">
-        <div className="line" />
+        <div className="line unselectable" />
       </div>
-      <div className="commentsContainer">{renderComments()}</div>
+      <div className="commentsContainer unselectable">{renderComments()}</div>
     </CardContainer>
   );
 };
