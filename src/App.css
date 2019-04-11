@@ -50,6 +50,16 @@ html {
   opacity: 1;
 }
 
+.transition-wave {
+  background: url(./assets/TransitionSidebar.svg) repeat-x;
+  position: absolute;
+  top: -198px;
+  width: 3400px;
+  height: 2000px;
+  animation: wave 1s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite;
+  transform: translate3d(0, 0, 0);
+}
+
 @keyframes wave {
   0% {
     margin-left: 0;
