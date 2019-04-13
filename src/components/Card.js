@@ -171,6 +171,7 @@ const Card = props => {
           </p>
         </ProfessorInformationContainer>
         <div
+          className="unselectable"
           style={{
             display: "flex",
             alignItems: "center",

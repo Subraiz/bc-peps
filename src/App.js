@@ -14,15 +14,8 @@ const Ocean = styled.div`
   height: 100%;
   width: 100vh;
   display: ${props => (props.solidWave ? "none" : "visible")};
-  margin-left: ${props => {
-    {
-      if (props.open) {
-        return "60%";
-      } else {
-        return "85%";
-      }
-    }
-  }};
+  margin-left: ${props => (props.open ? "60%" : "85%")}
+
   background: linear-gradient(
     ${theme.colors.pink1} 0 ${theme.colors.pink2} 100%
   );
@@ -73,7 +66,7 @@ class App extends Component {
     super();
     this.state = {
       oceanOpen: true,
-      solidWave: true,
+      solidWave: false,
       transition: false
     };
   }
@@ -104,14 +97,12 @@ class App extends Component {
         <TransitionOcean transition={this.state.transition}>
           <div className="transition-wave" />
         </TransitionOcean>
-        <Professor professor={items[0]} />
-        {
-          // <FrontPage
-          //   collapseWaves={this.collapseWaves}
-          //   expandWaves={this.expandWaves}
-          //   transitionWaves={this.transitionWaves}
-          // />
-        }
+
+        <FrontPage
+          collapseWaves={this.collapseWaves}
+          expandWaves={this.expandWaves}
+          transitionWaves={this.transitionWaves}
+        />
       </div>
     );
   }
