@@ -5,6 +5,7 @@
   "dependencies": {
     "@material-ui/core": "^3.9.3",
     "react": "^16.8.6",
+    "react-accessible-accordion": "^3.0.0",
     "react-autocomplete": "^1.8.1",
     "react-dom": "^16.8.6",
     "react-icons": "^3.5.0",
