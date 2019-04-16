@@ -1,24 +1,11 @@
 import React, { Component } from "react";
-import Card from "components/Card";
-import styled from "styled-components";
-import { items } from "utils/mock-api";
+import Card from "../components/Card";
+import posed, { PoseGroup } from "react-pose";
+import { items } from "../constants/items";
 
 import posed, { PoseGroup } from "react-pose";
 import Autocomplete from "react-autocomplete";
 import Fab from "@material-ui/core/Fab";
-
-const StyledFrontPage = styled.div`
-    z-index: 3;
-    position: "absolute";
-    display: "flex";
-    flex-direction: "column";
-    flex-grow: 1;
-
-    top: 0;
-    bottom: 0;
-    left: 0;
-    width: "100vw";
-`;
 
 const Modal = posed.div({
   enter: {
@@ -53,10 +40,12 @@ class FrontPage extends Component {
   componentDidMount = () => {};
 
   onSearchButtonPress = () => {
+    this.props.transitionWaves();
     console.log(this.state.value);
   };
 
   onSearchResultSelect = value => {
+    this.props.transitionWaves();
     this.setState({ value });
     console.log(value);
   };
@@ -65,6 +54,10 @@ class FrontPage extends Component {
     this.props.transitionWaves();
     this.setState({ value: item.name });
   }
+
+  onEvaluateClick() {}
+
+  onBrowseClick() {}
 
   reloadData = e => {
     e.preventDefault();
@@ -158,6 +151,7 @@ class FrontPage extends Component {
           <div style={styles.header}>
             {this.renderCornerTitle()}
             <Fab
+              onClick={this.onBrowseClick.bind(this)}
               variant="extended"
               aria-label="Delete"
               style={{
@@ -173,6 +167,7 @@ class FrontPage extends Component {
               Browse
             </Fab>
             <Fab
+              onClick={this.onEvaluateClick.bind(this)}
               variant="extended"
               aria-label="Delete"
               style={{

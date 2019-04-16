@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import styled, { keyframes } from "styled-components";
 
+import { items } from "./constants/items";
+import Professor from "./containers/Professor";
 import FrontPage from "./containers/FrontPage";
 import theme from "./constants/themeVariables";
 import "./App.css";
@@ -11,7 +13,8 @@ const Ocean = styled.div`
   float: right;
   height: 100%;
   width: 100vh;
-  margin-left: ${props => (props.open ? "60%" : "85%")};
+  display: ${props => (props.solidWave ? "none" : "visible")};
+  margin-left: ${props => (props.open ? "60%" : "85%")}
 
   background: linear-gradient(
     ${theme.colors.pink1} 0 ${theme.colors.pink2} 100%
@@ -22,10 +25,10 @@ const Ocean = styled.div`
 
 const transition = keyframes`
   0% {
-    left: -120%;
+    left: -180%;
   }
   25% {
-    left: 0%;
+    left: -50%;
   }
   50% {
     left: 0%;
@@ -46,7 +49,7 @@ const TransitionOcean = styled.div`
   height: 100%;
   width: 140vw;
   animation: ${props => (props.transition ? transition : false)} 1.5s linear
-  left: -120%;
+  left: -180%;
 
 
   background: linear-gradient(
@@ -63,6 +66,7 @@ class App extends Component {
     super();
     this.state = {
       oceanOpen: true,
+      solidWave: false,
       transition: false
     };
   }
@@ -85,7 +89,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Ocean open={this.state.oceanOpen}>
+        <Ocean open={this.state.oceanOpen} solidWave={this.state.solidWave}>
           <div className="wave" />
           <div className="wave" />
         </Ocean>
@@ -93,6 +97,7 @@ class App extends Component {
         <TransitionOcean transition={this.state.transition}>
           <div className="transition-wave" />
         </TransitionOcean>
+
         <FrontPage
           collapseWaves={this.collapseWaves}
           expandWaves={this.expandWaves}
