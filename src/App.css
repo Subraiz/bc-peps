@@ -22,17 +22,6 @@ html {
   overflow: hidden;
 }
 
-.ocean {
-  float: right;
-  height: 100%;
-  width: 100vh;
-  position: absolute;
-  background: linear-gradient(#fbb69d 0%, #f4d4bd 100%);
-  transform: rotate(-90deg);
-  margin-left: 100%;
-  z-index: -1;
-}
-
 .wave {
   background: url(./assets/Sidebar.svg) repeat-x;
   position: absolute;

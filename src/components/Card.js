@@ -5,7 +5,7 @@ import { FaQuoteLeft } from "react-icons/fa";
 
 const CardContainer = styled.div`
   width: 60%;
-  padding: 15px 35px;
+  padding: 25px 35px;
   background-color: white;
   border-radius: 50px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
@@ -53,7 +53,7 @@ const CardContainer = styled.div`
   }
 
   .noComment {
-    text-overflow: ellipsis
+    text-overflow: ellipsis;
     font-family: "Avenir";
     color: #1e1e1e;
     font-size: 15px;
@@ -66,7 +66,7 @@ const CardContainer = styled.div`
   .commentText {
     margin-left: 10px;
     width: 15vw;
-    text-overflow: ellipsis
+    text-overflow: ellipsis;
     font-family: "Avenir";
     color: #1e1e1e;
     font-size: 15px;
@@ -133,7 +133,7 @@ const Card = props => {
   }
 
   return (
-    <CardContainer onClick={props.onClick} className="card">
+    <CardContainer onClick={() => props.onClick()} className="card">
       <HeaderContainer>
         <ProfessorInformationContainer className="unselectable">
           <p
