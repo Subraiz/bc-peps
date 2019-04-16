@@ -3,7 +3,6 @@ import Card from "../components/Card";
 import posed, { PoseGroup } from "react-pose";
 import { items } from "../constants/items";
 
-import posed, { PoseGroup } from "react-pose";
 import Autocomplete from "react-autocomplete";
 import Fab from "@material-ui/core/Fab";
 
